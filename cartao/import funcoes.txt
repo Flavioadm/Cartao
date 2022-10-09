@@ -1,5 +1,0 @@
-import funcoes
-import time
-import os
-
-funcoes.cartao()
