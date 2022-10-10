@@ -41,12 +41,11 @@ with open("outros_numero.csv", "r") as arquivo:
     for line in outros_numeros:
         outros_numero.append(line)    
 
-    
-#funcoes.pausar()
-#funcoes.limpar()
-#imagens.cartao()
-#print(visa)
-funcoes.pausar()    
+imagens.cartao()    
+funcoes.aguardar()
+funcoes.limpar()
+imagens.abertura()
+funcoes.aguardar()    
 
 while(True):
 
@@ -91,7 +90,7 @@ while(True):
                             imagens.master_cartao()
                             funcoes.aguardar()
                             funcoes.limpar()
-                            numero_master = int(input("Qual o número do cartão \n"))
+                            numero_master = input("Qual o número do cartão \n")
 
                             if (numero_master in master):
                                 print("Numero do cartão já cadastrado na posição ", master.index(numero_master) + 1, "\n\n")
@@ -111,7 +110,7 @@ while(True):
                             funcoes.aguardar()
                             funcoes.limpar()
 
-                            numero_elo = int(input("Qual o número do cartão \n"))
+                            numero_elo = input("Qual o número do cartão \n")
 
                             if (numero_elo in elo):
                                 print("Numero do cartão já cadastrado na posição ", elo.index(numero_elo) + 1, "\n\n")
@@ -132,7 +131,7 @@ while(True):
                             funcoes.limpar()
                                                         
                             nome_cartao = input("Informe o nome do cartão \n\n")
-                            numero_outros = int(input("\n\n Qual número do cartão \n\n"))
+                            numero_outros = input("\n\n Qual número do cartão \n\n")
 
                             if(numero_outros in outros_numero):
                                 print("Numero do cartão já cadastrado na posição ", elo.index(numero_elo) + 1, "\n\n")
@@ -172,7 +171,6 @@ while(True):
                         funcoes.limpar()
                         for x in range (len(visa)):
                             novo = visa[x]
-                            #novo = novo.replace(',')
                             print("Seu cartão Visa cadastrado na posição ", x + 1, " é o de número ", visa[x], "\n\n\n")
                     
                         funcoes.pausar()                   
@@ -228,6 +226,10 @@ while(True):
                     
                         funcoes.pausar()                   
                         funcoes.limpar()
+                    
+                    elif(opcao_consulta == 6): # Retornar para o menu anterior
+                        funcoes.limpar()
+                        #break
 
                     else:
                         funcoes.meme()# Entrada de dados invalida
@@ -235,7 +237,7 @@ while(True):
 #******************************************* Termino da função de consulta de cartões*************************************************** 
 #******************************************* Inicio da função de exlusão de cartões***************************************************** 
                 elif (opcao == 3): # Inicio Visa****************************************************************************************
-
+                    funcoes.limpar()
                     funcoes.exclusao_cartao()
                     escolha = int(input("Qual a sua opção?\n\n"))
                     
@@ -324,7 +326,7 @@ while(True):
 #******************************************* Termino da função de exclusão de cartões Visa********************************************** 
 #******************************************* Inicio da função de consulta de exlusão de Master******************************************                                
                     elif (escolha == 2):
-
+                        funcoes.limpar()
                         funcoes.exclusao_cartao2()
 
                         tipo_exclusao = int(input("Informe o número"))
@@ -852,6 +854,7 @@ while(True):
                 funcoes.meme()
 
         elif(opcao == 9):
+            
             funcoes.limpar()
             with open("visa.csv", "w", newline="", encoding="utf-8") as arquivo:
                 escrever=csv.writer(arquivo, delimiter=',', lineterminator='\n')
@@ -864,9 +867,26 @@ while(True):
                 for x in range (len(master)):
                     numero = master[x]
                     escrever.writerow(numero)
-                
-           
 
+            with open("elo.csv", "w", newline="", encoding="utf-8") as arquivo:
+                escrever=csv.writer(arquivo, delimiter=',', lineterminator='\n')
+                for x in range (len(elo)):
+                    numero = elo[x]
+                    escrever.writerow(numero)
+
+            with open("outros_nome.csv", "w", newline="", encoding="utf-8") as arquivo:
+                escrever=csv.writer(arquivo, delimiter=',', lineterminator='\n')
+                for x in range (len(outros_nome)):
+                    numero = outros_nome[x]
+                    escrever.writerow(numero)
+
+            with open("outros_numero.csv", "w", newline="", encoding="utf-8") as arquivo:
+                escrever=csv.writer(arquivo, delimiter=',', lineterminator='\n')
+                for x in range (len(outros_numero)):
+                    numero = master[x]
+                    escrever.writerow(numero)
+
+            
             print("Até a proxima\n\n\n")
             imagens.sair()
             funcoes.aguardar()
