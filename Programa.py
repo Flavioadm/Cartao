@@ -1,3 +1,4 @@
+import re
 import colorama
 import funcoes
 import imagens
@@ -16,12 +17,31 @@ outros_numero = []
 
 
 with open("visa.csv", "r") as arquivo:
-    visas = csv.reader (arquivo, delimiter=",")
+    visas = csv.reader (arquivo, delimiter=" ")
     for line in visas:
         visa.append(line)
     
-        
+with open("master.csv", "r") as arquivo:
+    masters = csv.reader (arquivo, delimiter=",")
+    for line in masters:
+        master.append(line)    
 
+with open("elo.csv", "r") as arquivo:
+    elos = csv.reader (arquivo, delimiter=",")
+    for line in elos:
+        elo.append(line)    
+
+with open("outros_nome.csv", "r") as arquivo:
+    outros_nomes = csv.reader (arquivo, delimiter=",")
+    for line in outros_nomes:
+        outros_nome.append(line)
+
+with open("outros_numero.csv", "r") as arquivo:
+    outros_numeros = csv.reader (arquivo, delimiter=",")
+    for line in outros_numeros:
+        outros_numero.append(line)    
+
+    
 #funcoes.pausar()
 #funcoes.limpar()
 #imagens.cartao()
@@ -52,7 +72,7 @@ while(True):
                             imagens.visa_cartao()
                             funcoes.limpar()
                     
-                            numero_visa = int(input("Qual o número do cartão \n"))
+                            numero_visa = input("Qual o número do cartão \n")
 
                             if (numero_visa in visa):
                                 print("Numero do cartão já cadastrado na posição ", visa.index(numero_visa) + 1, "\n\n")
@@ -149,19 +169,17 @@ while(True):
                     opcao_consulta = int(input("Qual a sua escolha? \n\n"))
 
                     if (opcao_consulta == 1):
-
-                        x = 0
-
+                        funcoes.limpar()
                         for x in range (len(visa)):
+                            novo = visa[x]
+                            #novo = novo.replace(',')
                             print("Seu cartão Visa cadastrado na posição ", x + 1, " é o de número ", visa[x], "\n\n\n")
                     
                         funcoes.pausar()                   
                         funcoes.limpar()
 #******************************************* Início consulta cartões Master*********************************************************
                     elif (opcao_consulta == 2):
-
-                        x = 0
-
+                        funcoes.limpar()
                         for x in range (len(master)):
                             print("Seu cartão Master cadastrado na posição ", x + 1, " é o de número ", master[x], "\n\n\n")
                     
@@ -169,9 +187,7 @@ while(True):
                         funcoes.limpar()
 #******************************************* Início consulta cartões Elo *********************************************************                    
                     elif (opcao_consulta == 3):
-
-                        x = 0
-
+                        funcoes.limpar()
                         for x in range (len(elo)):
                             print("Seu cartão Elo cadastrado na posição ", x + 1, " é o de número ", elo[x], "\n\n\n")
                     
@@ -179,9 +195,7 @@ while(True):
                         funcoes.limpar()
 #******************************************* Início consulta cartões Outros cartões**************************************************
                     elif (opcao_consulta == 4):
-
-                        x = 0
-
+                        funcoes.limpar()
                         for x in range (len(outros_numero)):
                             print("Seu cartão", (outros_nome[x]), "cadastrado na posição ", x + 1, " é o de número ", (outros_numero[x]), "\n\n\n")
                     
@@ -189,16 +203,12 @@ while(True):
                         funcoes.limpar()
 #******************************************* Início consulta todos os cartões*********************************************************                    
                     elif(opcao_consulta == 5):
-
-                        x = 0
-
+                        funcoes.limpar()
                         for x in range (len(visa)):
                             print("Seu cartão Visa cadastrado na posição ", x + 1, " é o de número ", visa[x], "\n\n\n")
                     
                         funcoes.pausar()                   
                         funcoes.limpar()
-
-                        x = 0
 
                         for x in range (len(master)):
                             print("Seu cartão Master cadastrado na posição ", x + 1, " é o de número ", master[x], "\n\n\n")
@@ -206,15 +216,12 @@ while(True):
                         funcoes.pausar()                   
                         funcoes.limpar()
 
-                        x = 0
-
                         for x in range (len(elo)):
                             print("Seu cartão Elo cadastrado na posição ", x + 1, " é o de número ", elo[x], "\n\n\n")
                     
                         funcoes.pausar()                   
                         funcoes.limpar()
 
-                        x = 0
 
                         for x in range (len(outros_numero)):
                             print("Seu cartão", (outros_nome[x]), "cadastrado na posição ", x + 1, " é o de número ", (outros_numero[x]), "\n\n\n")
@@ -846,6 +853,20 @@ while(True):
 
         elif(opcao == 9):
             funcoes.limpar()
+            with open("visa.csv", "w", newline="", encoding="utf-8") as arquivo:
+                escrever=csv.writer(arquivo, delimiter=',', lineterminator='\n')
+                for x in range (len(visa)):
+                    numero = visa[x]
+                    escrever.writerow(numero)
+            
+            with open("master.csv", "w", newline="", encoding="utf-8") as arquivo:
+                escrever=csv.writer(arquivo, delimiter=',', lineterminator='\n')
+                for x in range (len(master)):
+                    numero = master[x]
+                    escrever.writerow(numero)
+                
+           
+
             print("Até a proxima\n\n\n")
             imagens.sair()
             funcoes.aguardar()
